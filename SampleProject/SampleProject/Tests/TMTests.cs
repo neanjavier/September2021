@@ -37,7 +37,7 @@ namespace SampleProject
 
             // Edit time
             TimeandMaterial timeAndMaterialObj = new TimeandMaterial();
-            timeAndMaterialObj.EditTM(driver);
+            timeAndMaterialObj.EditTM(driver, "test");
         }
 
         [Test, Order (3), Description("Check if user is able to delete Material record with valid data")]
@@ -52,10 +52,5 @@ namespace SampleProject
             timeAndMaterialObj.DeleteTM(driver);
         }
 
-        [TearDown]
-        public void CloseTestRun()
-        {
-
-        }
     }
 }

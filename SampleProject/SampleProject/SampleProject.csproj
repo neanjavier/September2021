@@ -18,6 +18,11 @@
     <None Remove="NUnit3TestAdapter" />
     <None Remove="Microsoft.NET.Test.Sdk" />
     <None Remove="DotNetSeleniumExtras.WaitHelpers" />
+    <None Remove="SpecFlow" />
+    <None Remove="SpecFlow.NUnit" />
+    <None Remove="SpecFlow.Tools.MsBuild.Generation" />
+    <None Remove="SpecFlow\" />
+    <None Remove="StepDefinition\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
@@ -29,10 +34,35 @@
     <PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="SpecFlow" Version="3.9.22" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.9.22" />
+    <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.9.22" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="Tests\" />
     <Folder Include="Utilities\" />
+    <Folder Include="SpecFlow\" />
+    <Folder Include="StepDefinition\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="SpecFlow\TMFeature.feature">
+      <Visible>False</Visible>
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TMFeature.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="SpecFlow\test.feature">
+      <Visible>False</Visible>
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>test.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="SpecFlow\test.feature.cs">
+      <DependentUpon>test.feature</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="SpecFlow\TMFeature.feature.cs">
+      <DependentUpon>TMFeature.feature</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

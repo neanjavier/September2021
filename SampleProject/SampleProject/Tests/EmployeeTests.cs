@@ -10,20 +10,6 @@ namespace SampleProject.Tests
     [Parallelizable]
     class EmployeeTests : CommonDriver
     {
-        [SetUp]
-        public void LoginActions()
-        {
-            // open chrome browser
-            driver = new ChromeDriver();
-
-            //Login page object initialization and definition
-            LoginPage loginPageObj = new LoginPage();
-            loginPageObj.LoginActions(driver);
-
-            // Home page object initialization and definition
-            HomePage homePageoObj = new HomePage();
-            homePageoObj.GoToEmployeePage(driver);
-        }
 
         [Test, Order(1), Description("Check if user is able to create Employee record with valid data")]
         public void CreateEmployeeTest()
@@ -49,10 +35,5 @@ namespace SampleProject.Tests
             employeePageobj.DeleteEmployee(driver);
         }
 
-        [TearDown]
-        public void CloseTestRun()
-        {
-
-        }
     }
 }

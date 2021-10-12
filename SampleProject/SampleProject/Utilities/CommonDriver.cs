@@ -6,9 +6,9 @@ using SampleProject.Pages;
 
 namespace SampleProject.Utilities
 {
-    class CommonDriver
+    public class CommonDriver
     {
-        public static IWebDriver driver;
+        public IWebDriver driver;
 
         [OneTimeSetUp]
         public void LoginActions()
@@ -24,7 +24,7 @@ namespace SampleProject.Utilities
         [OneTimeTearDown]
         public void CloseTestRun()
         {
-
+            driver.Quit();
         }
     }
 }
