@@ -28,7 +28,7 @@ namespace SampleProject
         }
 
         [Test, Order (2), Description("Check if user is able to edit Time record with valid data")]
-        public void EditTMTest()
+        public void EditTMTest(string Code, string TypeCode)
         {
 
             // Home page object initialization and definition
@@ -37,7 +37,7 @@ namespace SampleProject
 
             // Edit time
             TimeandMaterial timeAndMaterialObj = new TimeandMaterial();
-            timeAndMaterialObj.EditTM(driver, "test");
+            timeAndMaterialObj.EditTM(driver, Code, TypeCode);
         }
 
         [Test, Order (3), Description("Check if user is able to delete Material record with valid data")]

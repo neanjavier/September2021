@@ -10,6 +10,11 @@ namespace SampleProject.StepDefinition
     [Binding]
     public class TMFeatureSteps : CommonDriver
     {
+        // page obj init
+        TimeandMaterial timeandMaterialObj = new TimeandMaterial();
+        HomePage homePageoObj = new HomePage();
+        LoginPage loginPageObj = new LoginPage();
+
         [Given(@"I have logged into turnup portal successfully")]
         public void GivenIHaveLoggedIntoTurnupPortalSuccessfully()
         {
@@ -17,7 +22,7 @@ namespace SampleProject.StepDefinition
             driver = new ChromeDriver();
 
             //Login page object initialization and definition
-            LoginPage loginPageObj = new LoginPage();
+        
             loginPageObj.LoginActions(driver);
         }
 
@@ -25,7 +30,7 @@ namespace SampleProject.StepDefinition
         public void GivenIHaveNavigatedToTheTimeAndMaterialPage()
         {
             // Home page object initialization and definition
-            HomePage homePageoObj = new HomePage();
+
             homePageoObj.GoToTimeandMaterial(driver);
         }
 
@@ -53,18 +58,17 @@ namespace SampleProject.StepDefinition
             Assert.That(newPrice == "$15.00", "Actual code and expected code do not match");
         }
 
-        [When(@"I update '(.*)' on an existing time and material record")]
-        public void WhenIUpdateOnAnExistingTimeAndMaterialRecord(string Code)
+        [When(@"I update '(.*)' and '(.*)' on an existing time and material record")]
+        public void WhenIUpdateOnAnExistingTimeAndMaterialRecord(string Code, string TypeCode)
         {
             // TM page object initialization and definition
             TimeandMaterial timeAndMaterialObj = new TimeandMaterial();
-            timeAndMaterialObj.EditTM(driver, Code);
+            timeAndMaterialObj.EditTM(driver, Code, TypeCode);
         }
 
-        [Then(@"the result should have the updated '(.*)'")]
-        public void ThenTheResultShouldHaveTheUpdated(string Code)
+        [Then(@"the result should have the updated '(.*) and '(.*)'")]
+        public void ThenTheResultShouldHaveTheUpdated(string Code, string TypeCode)
         {
-            TimeandMaterial timeandMaterialObj = new TimeandMaterial();
 
             string updatedCode = timeandMaterialObj.GetUpdatedCode(driver);
             string updatedTypeCode = timeandMaterialObj.GetUpdatedTypeCode(driver);
@@ -72,7 +76,7 @@ namespace SampleProject.StepDefinition
             string updatedPrice = timeandMaterialObj.GetUpdatedPrice(driver);
 
             Assert.That(updatedCode == Code, "Code do not match");
-            Assert.That(updatedTypeCode == "T", "TypeCode do not match");
+            Assert.That(updatedTypeCode == TypeCode, "TypeCode do not match");
             Assert.That(updatedDescription == "test", "Description do not match");
             Assert.That(updatedPrice == "test", "Price do not match");
 

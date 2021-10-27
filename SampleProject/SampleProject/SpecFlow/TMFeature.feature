@@ -14,11 +14,10 @@ Scenario: create time and material record with valid details
 Scenario Outline: edit time and material record with valid details
 	Given I have logged into turnup portal successfully
 	And I have navigated to the time and material page
-	When I update '<Code>' on an existing time and material record
-	Then the result should have the updated '<Code>'
+	When I update '<Code>' and '<Type>' on an existing time and material record
+	Then the result should have the updated '<Code>' and '<Type>'
 
 	Examples:
-	| Code | Description | Price |
-	| test_Nean_edited1 | test1 | $30.00 |
-	| test_Nean_edited2 | test2 | $45.00 |
-	| test_Nean_edited3 | test3 | $60.00 |
+	| Code | TypeCode |
+	| test_Nean_edited1 | T |
+	| test_Nean_edited2 | M |

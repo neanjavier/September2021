@@ -86,7 +86,7 @@ namespace SampleProject.Pages
             return newPrice.Text;
         }
 
-        public void EditTM(IWebDriver driver, string Code)
+        public void EditTM(IWebDriver driver, string Code, string TypeCode)
         {
             // Go to last page
             IWebElement goToLastPageButton1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
@@ -95,7 +95,7 @@ namespace SampleProject.Pages
             // Check the record
             IWebElement lastRecord1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
 
-            if (lastRecord1.Text == Code)
+            if (lastRecord1.Text == "testNean1")
             {
                 // Click on the Edit Button
                 IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
@@ -107,9 +107,22 @@ namespace SampleProject.Pages
                 typeCodedropdown1.Click();
                 Thread.Sleep(2000);
 
-                // select TypeCode Material
-                IWebElement typecodeMaterial = driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[1]"));
-                typecodeMaterial.Click();
+                if (TypeCode == "M")
+                {
+                    // select TypeCode Material
+                    IWebElement typecodeMaterial = driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[1]"));
+                    typecodeMaterial.Click();
+                    Thread.Sleep(2000);
+                }
+                else
+                {
+                    // select TypeCode Material
+                    IWebElement typecodeTime = driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]"));
+                    typecodeTime.Click();
+                    Thread.Sleep(2000);
+                }
+
+
 
                 // identify Code
                 IWebElement codeTextbox1 = driver.FindElement(By.Id("Code"));
@@ -188,7 +201,7 @@ namespace SampleProject.Pages
             // Check last record
             IWebElement lastRecord2 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
 
-            if (lastRecord2.Text == "testNean_Updated")
+            if (lastRecord2.Text == "test_Nean_edited1")
             {
                 // Click on the Delete Button
                 IWebElement deleteButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
@@ -208,7 +221,7 @@ namespace SampleProject.Pages
                 IWebElement editedPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
 
                 // Assertion
-                Assert.That(editedCode.Text != "testNean_Updated", "Code record hasn't been deleted.");
+                Assert.That(editedCode.Text != "test_Nean_edited1" , "Code record hasn't been deleted.");
                 Assert.That(editedTypeCode.Text != "M", "TypeCode record hasn't been deleted.");
                 Assert.That(editedDescription.Text != "editedDescription", "Description record hasn't been deleted.");
                 Assert.That(editedPrice.Text != "$30.00", "Price record hasn't been deleted.");
